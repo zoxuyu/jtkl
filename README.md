@@ -11,8 +11,9 @@ Ein Alias, der in eine Klasse umgewandelt werden soll, muss bestimmten Kriterien
 (<[$char$++] PREFIX><[$char$*1] PREFIX_DIVIDER>)<[$char$++] CUSTOM_ALIAS>(<[$char$*1] SUFFIX_DIVIDER><[$char$+] SUFFIX / LANGUAGE>)
 ```
 Im folgenden wird eine Erklärung zu jedem Subtoken genannt.
+
 Subtoken | Erklärung
--------- | ---------
+------------- | -------------
 <[$char$++] PREFIX> | Mehrere Zeichen als Präfix, optional, nur wenn das auch Präfix-Divider
 <[$char$*1] PREFIX-DIVIDER> | Ein Zeichen um Präfix und Alias zu unterscheiden, konditional. Bsp.: "-" oder "_"
 <[$char$++] CUSTOM-ALIAS> | Ein eigener, obligatorischer Alias-Text
