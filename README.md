@@ -48,3 +48,11 @@ Fügen Sie dann für jede Sprache folgende Zeile direkt nach dem vorhergehenden 
 ```php
 $alias->AddLanguage("<SHORTCODE>", "<LONG REPLACEMENT (CSS-KLASSE)>");
 ```
+### Manipulationen im HTML-Bereich der Template-Datei
+Es gibt zwei Möglichkeiten den Alias auszulesen: Den originalen Alias und den Alias, der ebenfalls CSS-Klasse und Sprache enthält.
+```html
+<!-- Folgendes Tag enthält als Klasse den orignalen Alias. -->
+<tag class="<?php echo $alias->GetAlias();  ?>">. . .</tag>
+<!-- Folgendes Tag enthält als Klasse den Alias mit Präfix und Sprace. -->
+<tag class="<?php echo $alias->GetPuredAlias();  ?>">. . .</tag>
+```
