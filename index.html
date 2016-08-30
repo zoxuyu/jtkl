@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <title>Zoxzuyu-Joomla-Toolkit-Library by zoxuyu</title>
+  </head>
+
+  <body>
+    <header>
+      <div class="inner">
+        <h1>Zoxzuyu-Joomla-Toolkit-Library</h1>
+        <h2></h2>
+        <a href="https://github.com/zoxuyu/jtkl" class="button"><small>View project on</small> GitHub</a>
+      </div>
+    </header>
+
+    <div id="content-wrapper">
+      <div class="inner clearfix">
+        <section id="main-content">
+          <h1>
+<a id="zoxzuyu-joomla-toolkit-libray" class="anchor" href="#zoxzuyu-joomla-toolkit-libray" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Zoxzuyu-Joomla-Toolkit-Libray</h1>
+
+<h2>
+<a id="wofür-ist-zjtk-da" class="anchor" href="#wof%C3%BCr-ist-zjtk-da" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Wofür ist ZJTK da?</h2>
+
+<p>ZJTK ist eine PHP-Bibliothek zur Unterstützung der Entwicklung von Joomla!-Templates. Sie ermöglicht einem innerhalb der Template-Definitionen auf den Alias des Artikels zuzugreifen. Dies ist zum Beispiel dann wünschenswert, wenn man unterschiedlichen Seiten unterschiedliche Farben zuweisen möchte. Weiterhin gibt es die Möglichkeit Präfixe und Suffixe (Sprachen) in CSS-Klassen umzuwandeln (Alias-Class-Umleitung). Dadurch ist es möglich mehreren Seiten eine Farbe zuzuweisen, ohne für jede Seite eine eigene Klasse einzubauen. Ebenso erhöht dies die Flexibilität und Wartbarkeit der Seite in puncto Seiten hinzufügen, löschen und die Farbe ändern.</p>
+
+<p>Allerdings muss man ebenfalls an die Suchmaschinenoptimierung (SEO) denken. Da Joomla! den Beitragsalias zur URL-Generierung verwendet, sollte dieser nicht genutzt werden. Darum nutzt ZJTK ein einfaches Prinzip. Wenn ein Menüalias vorhanden ist (wird nicht für URL-Generierung verwendet), wird dieser verwendet. Ansonsten wird der Beitragsalias genutzt. Der Menüalias ist normalerweise nur bei Kontakt-, Kategorie- und Startseiten nicht vorhanden.</p>
+
+<h2>
+<a id="wie-benutzt-man-zjtk" class="anchor" href="#wie-benutzt-man-zjtk" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Wie benutzt man ZJTK</h2>
+
+<p>Die folgenden zwei Abschnitte treffen nur zu, wenn man die Alias-Class-Umleitung nutzen will. Wenn du nur den Alias ausgeben willst, springe direkt zu dem Abschnitt "Manipulationen im PHP-Bereich der Template-Datei". Bevor einzelne Details und Code-Schnipsel gezeigt werden sollen, wird erst noch das Prinzip der Alias-Class-Umleitung erläutert.</p>
+
+<h3>
+<a id="die-alias-class-umleitung" class="anchor" href="#die-alias-class-umleitung" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Die Alias-Class-Umleitung</h3>
+
+<p>Ein Alias, der in eine Klasse umgewandelt werden soll, muss bestimmten Kriterien entsprechen. Im folgenden ist das Token wiedergegeben, mit dem ein Alias identifiziert wird:</p>
+
+<pre><code>(&lt;[$char$++] PREFIX&gt;&lt;[$char$*1] PREFIX_DIVIDER&gt;)&lt;[$char$++] CUSTOM_ALIAS&gt;(&lt;[$char$*1] SUFFIX_DIVIDER&gt;&lt;[$char$+] SUFFIX / LANGUAGE&gt;)
+</code></pre>
+
+<p>Im folgenden wird eine Erklärung zu jedem Subtoken genannt.</p>
+
+<table>
+<thead>
+<tr>
+<th>Subtoken</th>
+<th>Erklärung</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt;[$char$++] PREFIX&gt;</td>
+<td>Mehrere Zeichen als Präfix, optional, nur wenn das auch Präfix-Divider</td>
+</tr>
+<tr>
+<td>&lt;[$char$*1] PREFIX-DIVIDER&gt;</td>
+<td>Ein Zeichen um Präfix und Alias zu unterscheiden, konditional. Bsp.: "-" oder "_"</td>
+</tr>
+<tr>
+<td>&lt;[$char$++] CUSTOM-ALIAS&gt;</td>
+<td>Ein eigener, obligatorischer Alias-Text</td>
+</tr>
+<tr>
+<td>&lt;[$char$*1] SUFFIX-DIVIDER&gt;</td>
+<td>Ein Zeichen um Suffix und Alias zu unterscheiden, konditional. Bsp.: "-" oder "_"</td>
+</tr>
+<tr>
+<td>&lt;[$char$++] SUFFFIX / LANGUAGE&gt;</td>
+<td>Mehrere Zeichen als SUFFIX / SPRACHE optional, nur wenn das auch Suffix-Divider</td>
+</tr>
+</tbody>
+</table>
+
+<p>Im Klartext heißt dies, dass folgende Aliase korrekt sind. (Präfix- und Suffixdivider aus Erklärungszwecken auf "-" gesetzt.)</p>
+
+<ul>
+<li>prefix-alias-language</li>
+<li>prefix-alias</li>
+<li>alias-language</li>
+<li>alias</li>
+</ul>
+
+<h3>
+<a id="manipulation-im-joomla-backend" class="anchor" href="#manipulation-im-joomla-backend" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Manipulation im Joomla! Backend</h3>
+
+<p>Öffnen Sie die Menüs der zu bearbeitenden Joomla!-Seite. Gehen Sie zu jedem Artikel und ändern Sie den Alias nach dem oben genannten Schema ab. EINMAL FESTGELEGTE PRÄFIX-/SUFFIX-DIVIDER MÜSSEN BEI ALLEN ALIASEN BEIBEHALTEN WERDEN.</p>
+
+<h3>
+<a id="manipulationen-im-php-bereich-der-template-datei" class="anchor" href="#manipulationen-im-php-bereich-der-template-datei" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Manipulationen im PHP-Bereich der Template-Datei</h3>
+
+<p>Fügen Sie folgenden Zeile in den PHP-Abschnitt des Templates, indem Dateien eingebunden werden:</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">@</span><span class="pl-k">require_once</span>(<span class="pl-s"><span class="pl-pds">"</span>zjtk.php<span class="pl-pds">"</span></span>) <span class="pl-k">or</span> <span class="pl-k">die</span>(<span class="pl-s"><span class="pl-pds">"</span>DIE ZJTK.PHP-DATEI WURDE NICHT GEFUNDEN!!!<span class="pl-pds">"</span></span>);</span></pre></div>
+
+<p>Anschließend fügen Sie nach dieser Zeile folgenden PHP-Code ein.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$alias</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Alias</span>();</span>
+<span class="pl-s1"><span class="pl-smi">$alias</span><span class="pl-k">-&gt;</span>Config(<span class="pl-s"><span class="pl-pds">"</span>prefixDivider<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;IHR PREFIX DIVIDER&gt;<span class="pl-pds">"</span></span>);</span>
+<span class="pl-s1"><span class="pl-smi">$alias</span><span class="pl-k">-&gt;</span>Config(<span class="pl-s"><span class="pl-pds">"</span>suffixDivider<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;IHR SUFFIX DIVIDER&gt;<span class="pl-pds">"</span></span>);</span></pre></div>
+
+<p>Fügen Sie dann für jedes Präfix folgende Zeile direkt nach dem vorhergehenden Code ein.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$alias</span><span class="pl-k">-&gt;</span>AddPrefix(<span class="pl-s"><span class="pl-pds">"</span>&lt;PRÄFIX&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;PRÄFIX-ERSATZ (CSS-KLASSE)&gt;<span class="pl-pds">"</span></span>);</span></pre></div>
+
+<p>Fügen Sie dann für jede Sprache folgende Zeile direkt nach dem vorhergehenden Code ein.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-smi">$alias</span><span class="pl-k">-&gt;</span>AddLanguage(<span class="pl-s"><span class="pl-pds">"</span>&lt;SHORTCODE&gt;<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>&lt;LONG REPLACEMENT (CSS-KLASSE)&gt;<span class="pl-pds">"</span></span>);</span></pre></div>
+
+<h3>
+<a id="manipulationen-im-html-bereich-der-template-datei" class="anchor" href="#manipulationen-im-html-bereich-der-template-datei" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Manipulationen im HTML-Bereich der Template-Datei</h3>
+
+<p>Es gibt zwei Möglichkeiten den Alias auszulesen: Den originalen Alias und den Alias, der ebenfalls CSS-Klasse und Sprache enthält.</p>
+
+<div class="highlight highlight-text-html-basic"><pre><span class="pl-c">&lt;!-- Folgendes Tag enthält als Klasse den orignalen Alias. --&gt;</span>
+&lt;<span class="pl-ent">tag</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>&lt;?php echo $alias-&gt;GetAlias();  ?&gt;<span class="pl-pds">"</span></span>&gt;. . .&lt;/<span class="pl-ent">tag</span>&gt;
+<span class="pl-c">&lt;!-- Folgendes Tag enthält als Klasse den Alias mit Präfix und Sprace. --&gt;</span>
+&lt;<span class="pl-ent">tag</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>&lt;?php echo $alias-&gt;GetPuredAlias();  ?&gt;<span class="pl-pds">"</span></span>&gt;. . .&lt;/<span class="pl-ent">tag</span>&gt;</pre></div>
+        </section>
+
+        <aside id="sidebar">
+          <a href="https://github.com/zoxuyu/jtkl/zipball/master" class="button">
+            <small>Download</small>
+            .zip file
+          </a>
+          <a href="https://github.com/zoxuyu/jtkl/tarball/master" class="button">
+            <small>Download</small>
+            .tar.gz file
+          </a>
+
+          <p class="repo-owner"><a href="https://github.com/zoxuyu/jtkl"></a> is maintained by <a href="https://github.com/zoxuyu">zoxuyu</a>.</p>
+
+          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
+        </aside>
+      </div>
+    </div>
+
+  
+  </body>
+</html>
