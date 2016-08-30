@@ -1,2 +1,5 @@
-# jtkl
-Zoxzuyu-Joomla-Toolkit-Library
+# Zoxzuyu-Joomla-Toolkit-Library
+## Wofür ist ZJTK da?
+ZJTK ist eine PHP-Bibliothek zur Unterstützung der Entwicklung von Joomla!-Templates. Sie ermöglicht einem innerhalb der Template-Definitionen auf den Alias des Artikels zuzugreifen. Dies ist zum Beispiel dann wünschenswert, wenn man unterschiedlichen Seiten unterschiedliche Farben zuweisen möchte. Weiterhin gibt es die Möglichkeit Präfixe und Suffixe (Sprachen) in CSS-Klassen umzuwandeln (Alias-Class-Umleitung). Dadurch ist es möglich mehreren Seiten eine Farbe zuzuweisen, ohne für jede Seite eine eigene Klasse einzubauen. Ebenso erhöht dies die Flexibilität und Wartbarkeit der Seite in puncto Seiten hinzufügen, löschen und die Farbe ändern.
+
+Allerdings muss man ebenfalls an die Suchmaschinenoptimierung (SEO) denken. Da Joomla! den Beitragsalias zur URL-Generierung verwendet, sollte dieser nicht genutzt werden. Darum nutzt ZJTK ein einfaches Prinzip. Wenn ein Menüalias vorhanden ist (wird nicht für URL-Generierung verwendet), wird dieser verwendet. Ansonsten wird der Beitragsalias genutzt. Der Menüalias ist normalerweise nur bei Kontakt-, Kategorie- und Startseiten nicht vorhanden.
