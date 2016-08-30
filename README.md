@@ -7,6 +7,6 @@ Allerdings muss man ebenfalls an die Suchmaschinenoptimierung (SEO) denken. Da J
 Die folgenden zwei Abschnitte treffen nur zu, wenn man die Alias-Class-Umleitung nutzen will. Wenn du nur den Alias ausgeben willst, springe direkt zu dem Abschnitt "Manipulationen im PHP-Bereich der Template-Datei". Bevor einzelne Details und Code-Schnipsel gezeigt werden sollen, wird erst noch das Prinzip der Alias-Class-Umleitung erläutert.
 ### Die Alias-Class-Umleitung
 Ein Alias, der in eine Klasse umgewandelt werden soll, muss bestimmten Kriterien entsprechen. Im folgenden ist das Token wiedergegeben, mit dem ein Alias identifiziert wird:
-´´
+``
 (<[$char$++] PREFIX><[$char$*1] PREFIX_DIVIDER>)<[$char$++] CUSTOM_ALIAS>(<[$char$*1] SUFFIX_DIVIDER><[$char$+] SUFFIX | LANGUAGE>)
-´´
+``
