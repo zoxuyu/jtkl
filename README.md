@@ -8,5 +8,13 @@ Die folgenden zwei Abschnitte treffen nur zu, wenn man die Alias-Class-Umleitung
 ### Die Alias-Class-Umleitung
 Ein Alias, der in eine Klasse umgewandelt werden soll, muss bestimmten Kriterien entsprechen. Im folgenden ist das Token wiedergegeben, mit dem ein Alias identifiziert wird:
 ```
-(<[$char$++] PREFIX><[$char$*1] PREFIX_DIVIDER>)<[$char$++] CUSTOM_ALIAS>(<[$char$*1] SUFFIX_DIVIDER><[$char$+] SUFFIX | LANGUAGE>)
+(<[$char$++] PREFIX><[$char$*1] PREFIX_DIVIDER>)<[$char$++] CUSTOM_ALIAS>(<[$char$*1] SUFFIX_DIVIDER><[$char$+] SUFFIX / LANGUAGE>)
 ```
+Im folgenden wird eine Erklärung zu jedem Subtoken genannt.
+Subtoken | Erklärung
+-------- | ---------
+<[$char$++] PREFIX> | Mehrere Zeichen als Präfix, optional, nur wenn das auch Präfix-Divider
+<[$char$*1] PREFIX-DIVIDER> | Ein Zeichen um Präfix und Alias zu unterscheiden, konditional. Bsp.: "-" oder "_"
+<[$char$++] CUSTOM-ALIAS> | Ein eigener, obligatorischer Alias-Text
+<[$char$*1] SUFFIX-DIVIDER> | Ein Zeichen um Suffix und Alias zu unterscheiden, konditional. Bsp.: "-" oder "_"
+<[$char$++] SUFFFIX / LANGUAGE> | Mehrere Zeichen als SUFFIX / SPRACHE optional, nur wenn das auch Suffix-Divider
